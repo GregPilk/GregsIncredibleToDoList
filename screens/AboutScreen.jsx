@@ -4,18 +4,23 @@ import {Text} from 'react-native';
 const AboutScreen = ({}) => {
   const [message, setMessage] = React.useState('');
 
-  const apiCall = async () => {
+  const apiCall = React.useCallback(async () => {
     const response = await fetch(
       'https://corporatebs-generator.sameerkumar.website/',
       {
         method: 'GET',
       },
     );
+    // const response = await fetch('https://10.0.2.2:3333/fact', {
+    //   method: 'GET',
+    // });
     const json = await response.json();
 
     const {phrase} = json;
     setMessage(phrase);
-  };
+    // const {facet} = json;
+    // setMessage(fact);
+  });
   React.useEffect(() => {
     apiCall().then(() => {});
   }, []);
